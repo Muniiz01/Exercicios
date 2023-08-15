@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            font: normal 12pt Arial;
+        }
+
+        section {
+            display: block;
+            width: 500px;
+            height: 300px;
+            background-color: rgb(235, 217, 185);
+            position: relative;
+            margin: 200px auto;
+            border-radius: 20px;
+        }
+
+        label {
+            float: left;
+            margin-top: 25px;
+            margin-left: 20px;
+        }
+
+        .button {
+
+            position: relative;
+            top: 120px;
+            right: 315px;
+            border-radius: 5px;
+            border: none;
+            transition: ease-in-out 0.5s;
+        }
+
+        .button:hover {
+            background-color: blueviolet;
+            color: white;
+            transform: scale(1.2);
+        }
+        #msg{
+            float: left;
+            margin: 80px 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <section>
+        <form action="/action">
+        <label for="dataNsc">Data de Nascimento: <input type="number" name="idade" id="dataNsc"></label>
+
+
+        <label for="genero">Sexo:
+            <input type="radio" name="sex" id="mas" required>
+            Masculino
+        </label>
+        <label for="">
+            <input type="radio" name="sex" id="fem" required>
+            Feminino
+        </label>
+        <input class="button" type="button" value="verificar" onclick="dataNascimento()">
+        <div id="msg"></div>
+    </form>
+    </section>
+    <script>
+        function dataNascimento() {
+            var msg = window.document.getElementById('msg')
+            var data = new Date()
+            var ano = data.getFullYear()
+            var nsc = document.getElementById('dataNsc')
+            
+            if(nsc.value.length <= 0 || Number(nsc.value) > ano){
+                window.alert('[ERRO] Verifique os dados e tente novamente!')
+            }else {
+                var gen = document.getElementsByName('sex')
+                var idade = ano - Number(nsc.value)
+                
+                var genero = ''
+                if(gen[0].checked){
+                    genero = 'Masculino'
+                }else if(gen[1].checked){
+                    genero = 'Feminino'
+                }
+                msg.innerHTML = `<p>sua idade e ${idade} anos do sexo ${genero}</p>`
+            }
+        }
+    </script>
+</body>
+
+</html>
